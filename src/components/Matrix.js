@@ -1,17 +1,16 @@
 import React from 'react';
 import { renderList } from '../assets/utils'
+import '../styles/Matrix.css'
 
 const Matrix = (props) => {
     const renderCell = (num, key) =>
-        <span key={ key }>{ num }</span>
+        <span key={ key } className="matrix__cell">{ num }</span>
 
     const renderRow = (row, key) =>
-        <div key={ key }>
-            { renderList(row, renderCell) }
-        </div>
+        renderList(row, renderCell)
 
     return (
-        <div>
+        <div className="matrix">
             { renderList(props.matrix, renderRow) }
         </div>
     );

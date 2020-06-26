@@ -1,0 +1,9 @@
+.matrix {
+    display: grid;
+    grid-template-columns: repeat(5, 5vh);
+    justify-items: center;
+}
+
+.matrix__cell {
+    text-align: center;
+}
