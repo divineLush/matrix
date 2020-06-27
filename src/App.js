@@ -7,13 +7,17 @@ class App extends Component {
       [1, 0, 0, 1, 1],
       [0, 0, 1, 1, 0],
       [1, 0, 1, 0, 1]
-    ]
+    ],
+    selectedNums: []
   }
+
+  setSelectedNums = selectedNums =>
+    this.setState({ selectedNums })
 
   render() {
     return (
       <div className="App">
-        <Matrix matrix={ this.state.matrix } />
+        <Matrix matrix={ this.state.matrix } setSelectedNums={ this.setSelectedNums } />
       </div>
     );
   }
