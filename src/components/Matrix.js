@@ -5,7 +5,14 @@ import RectangleSelection from 'react-rectangle-selection'
 
 const Matrix = (props) => {
     const renderCell = (num, key) =>
-        <span key={ key } className="matrix__cell">{ num }</span>
+        <div
+            key={ key }
+            className="matrix__cell"
+            style={{
+                backgroundColor: num === 0
+                    ? 'green' : 'red'
+            }}
+        ></div>
 
     const renderRow = (row, key) =>
         renderList(row, renderCell)
@@ -19,7 +26,7 @@ const Matrix = (props) => {
         for (let i = 0; i < matrixCells.length; i++) {
             const domRect = matrixCells[i].getBoundingClientRect()
             if (doOverlap(coords, domRect)) {
-                matrixCells[i].style.border = '3px solid green'
+                matrixCells[i].style.border = '3px solid blue'
                 selectedNums.push(i)
             }
         }

@@ -1,10 +1,14 @@
 .matrix {
     display: grid;
     grid-template-columns: repeat(5, 5vh);
+    grid-gap: 2vh;
     justify-items: center;
+    justify-content: center;
 }
 
 .matrix__cell {
+    height: 3vh;
+    width: 3vh;
     text-align: center;
     user-select: none;
 }
