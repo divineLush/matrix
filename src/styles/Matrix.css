@@ -6,4 +6,5 @@
 
 .matrix__cell {
     text-align: center;
+    user-select: none;
 }

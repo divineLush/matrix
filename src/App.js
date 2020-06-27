@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import Matrix from './components/Matrix'
 
 class App extends Component {
