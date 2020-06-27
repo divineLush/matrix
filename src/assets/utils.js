@@ -23,11 +23,14 @@ export const calcMatrixElCoords = (matrix, idx) => {
     let k = 0
     for (let i = 0; i < matrix.length; i++) {
         for (let j = 0; j < matrix[i].length; j++) {
-            k += 1
             if (k === idx)
                 return [i, j]
+            k = k + 1
         }
     }
 
-    return [-1, -1]
+    return []
 }
+
+export const cloneMatrix = matrix =>
+    matrix.map(row => [...row])

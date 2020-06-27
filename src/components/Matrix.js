@@ -6,18 +6,23 @@ import { Check, X } from 'react-bootstrap-icons'
 
 const Matrix = (props) => {
     const renderCell = (num, key) =>
-        num === 0
+        num === 1
             ? <Check className="matrix__cell" key={ key } />
             : <X className="matrix__cell" key={ key } />
 
     const renderRow = (row, key) =>
         renderList(row, renderCell)
 
-    const onSelectHandler = (e, coords) => {
+    const removeColoring = () => {
         const matrixCells = document.querySelector('.matrix').children
         for (let i = 0; i < matrixCells.length; i++)
             matrixCells[i].style.backgroundColor = 'inherit'
 
+        return matrixCells
+    }
+
+    const onSelectHandler = (e, coords) => {
+        const matrixCells = removeColoring()
         const selectedNums = []
         for (let i = 0; i < matrixCells.length; i++) {
             const domRect = matrixCells[i].getBoundingClientRect()
@@ -29,10 +34,15 @@ const Matrix = (props) => {
         props.setSelectedNums(selectedNums)
     }
 
+    const onMouseUpHandler = () => {
+        removeColoring()
+        props.mouseUpHandler()
+    }
+
     return (
         <RectangleSelection
             onSelect={ onSelectHandler }
-            onMouseUp = { props.mouseUpHandler }
+            onMouseUp = { onMouseUpHandler }
             style={{ borderColor: "#d4cbef" }}
         >
             <div className="matrix">

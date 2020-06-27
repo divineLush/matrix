@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Matrix from './components/Matrix'
 import AppModal from './components/AppModal'
-import { calcMatrixElCoords } from './assets/utils'
+import { cloneMatrix } from './assets/utils'
 
 class App extends Component {
   state = {
@@ -11,15 +11,40 @@ class App extends Component {
       [1, 0, 1, 0, 1]
     ],
     selectedNums: [],
-    showModal: false
+    prevMatrix: [],
+    showModal: false,
+    shouldUpdatePrevMatrix: false
   }
 
   setSelectedNums = selectedNums =>
     this.setState({ selectedNums })
 
   mouseUpHandler = () => {
-    this.setState({ showModal: true })
+    const showModal = true
+    const shouldUpdatePrevMatrix = true
+    this.setState({ showModal, shouldUpdatePrevMatrix })
   }
+
+  checkboxHandler = el => {
+    const matrix = cloneMatrix(this.state.matrix)
+    const prevMatrix = cloneMatrix(matrix)
+    if (this.state.shouldUpdatePrevMatrix) {
+      const shouldUpdatePrevMatrix = false
+      this.setState({ prevMatrix, shouldUpdatePrevMatrix })
+    }
+    matrix[el[0]][el[1]] = matrix[el[0]][el[1]] === 0 ? 1 : 0
+    this.setState({ matrix })
+  }
+
+  cancelHandler = () => {
+    const matrix = cloneMatrix(this.state.prevMatrix)
+    const prevMatrix = cloneMatrix(this.state.matrix)
+    const showModal = false
+    this.setState({ matrix, prevMatrix, showModal })
+  }
+
+  updateMatrix = () =>
+    this.setState({ showModal: false })
 
   render() {
     return (
@@ -27,11 +52,15 @@ class App extends Component {
         <Matrix
           matrix={ this.state.matrix }
           setSelectedNums={ this.setSelectedNums }
-          mouseUpHandler = { this.mouseUpHandler }
+          mouseUpHandler={ this.mouseUpHandler }
         />
         <AppModal
           show={ this.state.showModal }
-          onCancel={ () => this.setState({ showModal: false }) }
+          selectedNums={ this.state.selectedNums }
+          matrix={ this.state.matrix }
+          onCancel={ this.cancelHandler }
+          checkboxHandler={ el => this.checkboxHandler(el) }
+          onConfirm={ this.updateMatrix }
         />
       </div>
     );
