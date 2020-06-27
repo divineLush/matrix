@@ -7,8 +7,5 @@
 }
 
 .matrix__cell {
-    height: 3vh;
-    width: 3vh;
-    text-align: center;
-    user-select: none;
+    background-color: inherit;
 }

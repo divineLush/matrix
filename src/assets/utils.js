@@ -18,3 +18,16 @@ export const doOverlap = (coords, domRect) => {
 
     return xOverlap && yOverlap
 }
+
+export const calcMatrixElCoords = (matrix, idx) => {
+    let k = 0
+    for (let i = 0; i < matrix.length; i++) {
+        for (let j = 0; j < matrix[i].length; j++) {
+            k += 1
+            if (k === idx)
+                return [i, j]
+        }
+    }
+
+    return [-1, -1]
+}

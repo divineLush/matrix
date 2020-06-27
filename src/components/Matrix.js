@@ -2,17 +2,13 @@ import React from 'react';
 import { renderList, doOverlap } from '../assets/utils'
 import '../styles/Matrix.css'
 import RectangleSelection from 'react-rectangle-selection'
+import { Check, X } from 'react-bootstrap-icons'
 
 const Matrix = (props) => {
     const renderCell = (num, key) =>
-        <div
-            key={ key }
-            className="matrix__cell"
-            style={{
-                backgroundColor: num === 0
-                    ? 'green' : 'red'
-            }}
-        ></div>
+        num === 0
+            ? <Check className="matrix__cell" key={ key } />
+            : <X className="matrix__cell" key={ key } />
 
     const renderRow = (row, key) =>
         renderList(row, renderCell)
@@ -20,28 +16,24 @@ const Matrix = (props) => {
     const onSelectHandler = (e, coords) => {
         const matrixCells = document.querySelector('.matrix').children
         for (let i = 0; i < matrixCells.length; i++)
-            matrixCells[i].style.border = 'none'
+            matrixCells[i].style.backgroundColor = 'inherit'
 
         const selectedNums = []
         for (let i = 0; i < matrixCells.length; i++) {
             const domRect = matrixCells[i].getBoundingClientRect()
             if (doOverlap(coords, domRect)) {
-                matrixCells[i].style.border = '3px solid blue'
+                matrixCells[i].style.backgroundColor = '#cbefd4'
                 selectedNums.push(i)
             }
         }
         props.setSelectedNums(selectedNums)
     }
 
-    const selectionStyle = {
-        backgroundColor: "rgba(0,0,255,0.4)",
-        borderColor: "blue"
-    }
-
     return (
         <RectangleSelection
             onSelect={ onSelectHandler }
-            style={ selectionStyle }
+            onMouseUp = { props.mouseUpHandler }
+            style={{ borderColor: "#d4cbef" }}
         >
             <div className="matrix">
                 { renderList(props.matrix, renderRow) }
