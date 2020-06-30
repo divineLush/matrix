@@ -35,8 +35,10 @@ const Matrix = (props) => {
     }
 
     const onMouseUpHandler = () => {
-        removeColoring()
-        props.mouseUpHandler()
+        if (props.selectedNums !== 0) {
+            removeColoring()
+            props.mouseUpHandler()
+        }
     }
 
     return (

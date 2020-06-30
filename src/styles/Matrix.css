@@ -4,6 +4,7 @@
     grid-gap: 2vh;
     justify-items: center;
     justify-content: center;
+    padding: 10vh;
 }
 
 .matrix__cell {

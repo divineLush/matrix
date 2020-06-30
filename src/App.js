@@ -16,13 +16,20 @@ class App extends Component {
     shouldUpdatePrevMatrix: false
   }
 
+  componentDidMount() {
+    const prevMatrix = cloneMatrix(this.state.matrix)
+    this.setState({ prevMatrix })
+  }
+
   setSelectedNums = selectedNums =>
     this.setState({ selectedNums })
 
   mouseUpHandler = () => {
-    const showModal = true
-    const shouldUpdatePrevMatrix = true
-    this.setState({ showModal, shouldUpdatePrevMatrix })
+    if (this.state.selectedNums.length !== 0) {
+      const showModal = true
+      const shouldUpdatePrevMatrix = true
+      this.setState({ showModal, shouldUpdatePrevMatrix })
+    }
   }
 
   checkboxHandler = el => {
