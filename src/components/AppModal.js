@@ -22,7 +22,7 @@ const AppModal = (props) => {
           />)
 
     return (
-        <Modal show={ props.show } onHide={ () => {} }>
+        <Modal show={ props.show }>
           <Modal.Header>
             <Modal.Title>Edit matrix</Modal.Title>
           </Modal.Header>

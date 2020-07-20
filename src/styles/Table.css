@@ -1,0 +1,8 @@
+.days {
+    display: flex;
+    justify-content: center;
+}
+
+.day {
+    margin: 0 2vh;
+}

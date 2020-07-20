@@ -2,14 +2,17 @@ import React, { Component } from 'react'
 import Matrix from './components/Matrix'
 import AppModal from './components/AppModal'
 import { cloneMatrix } from './assets/utils'
+import './styles/Table.css'
 
 class App extends Component {
   state = {
     matrix: [
       [1, 0, 0, 1, 1],
       [0, 0, 1, 1, 0],
-      [1, 0, 1, 0, 1]
+      [1, 0, 1, 0, 1],
+      [1, 0, 0, 0, 1]
     ],
+    days: ['пн', 'вт', 'ср', 'чт', 'пт'],
     selectedNums: [],
     prevMatrix: [],
     showModal: false,
@@ -56,6 +59,13 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <div className="days">
+          {
+              this.state.days
+                  .map((day, key) =>
+                      <span key={ key } className="day">{ day}</span>)
+          }
+        </div>
         <Matrix
           matrix={ this.state.matrix }
           setSelectedNums={ this.setSelectedNums }
